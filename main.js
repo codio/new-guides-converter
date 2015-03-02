@@ -17,6 +17,8 @@ oldGuides.load(path + GUIDES_PATH + 'sections.md').then(function (jsonStructure)
     return newGuides.save(metadata, path);
 }).then(function () {
     oldGuides.cleanup(path + GUIDES_PATH + 'sections.md');
+}).then(function () {
+    console.error('Guides were converted. Please start editor again');
 }).catch(function() {
     console.error('The convention failed. Please contact with codio support team.');
 });

@@ -7,10 +7,11 @@
     "url": "https://Maximka@bitbucket.org/codio/new-guides-converter.git"
   },
   "scripts": {
-    "build": "browserify main.js --bare -o ./build/converter.js"
+    "build": "browserify main.js --bare | uglifyjs > ./build/converter.js"
   },
   "devDependencies": {
-    "browserify": "^9.0.3"
+    "browserify": "^9.0.3",
+    "uglify-js": "^2.4.16"
   },
   "dependencies": {
     "bluebird": "^2.9.13",
