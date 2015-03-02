@@ -26,7 +26,7 @@ module.exports = function (oldJson) {
     });
     return metadata;
 };
-},{"./new":3,"lodash":15}],2:[function(require,module,exports){
+},{"./new":3,"lodash":52}],2:[function(require,module,exports){
 // guides constants
     'use strict';
 
@@ -139,7 +139,7 @@ exports.Section = Section;
     defineProperty(p, 'commands');
 
     module.exports = Action;
-},{"./path-parser":6,"lodash":15}],5:[function(require,module,exports){
+},{"./path-parser":6,"lodash":52}],5:[function(require,module,exports){
 /*
     Guides metadata object
 */
@@ -316,7 +316,7 @@ exports.Section = Section;
 
     module.exports = metadata;
 
-},{"./section":7,"lodash":15}],6:[function(require,module,exports){
+},{"./section":7,"lodash":52}],6:[function(require,module,exports){
 // Module for file open/close string parsing
     'use strict';
 
@@ -393,7 +393,7 @@ exports.Section = Section;
         return parsePath(path);
     };
 
-},{"lodash":15}],7:[function(require,module,exports){
+},{"lodash":52}],7:[function(require,module,exports){
 /*
     Guides Section Object
 */
@@ -700,7 +700,7 @@ exports.Section = Section;
 
     module.exports = Section;
 
-},{"../consts":2,"../tools":9,"./action":4,"lodash":15}],8:[function(require,module,exports){
+},{"../consts":2,"../tools":9,"./action":4,"lodash":52}],8:[function(require,module,exports){
 'use strict';
 
 var promise = require('bluebird');
@@ -734,7 +734,7 @@ module.exports = function (metadata, path) {
         return write(path + '/.guides/metadata.json', metadata.jsonString());
     });
 };
-},{"bluebird":14,"fs":undefined,"lodash":15}],9:[function(require,module,exports){
+},{"bluebird":17,"fs":undefined,"lodash":52}],9:[function(require,module,exports){
 'use strict';
 
 exports.GUID = function (length) {
@@ -7105,7 +7105,7 @@ exports.load = function(file) {
 exports.cleanup = function(file) {
     return fs.unlinkAsync(file);
 };
-},{"./parser":12,"bluebird":14,"fs":undefined}],12:[function(require,module,exports){
+},{"./parser":12,"bluebird":17,"fs":undefined}],12:[function(require,module,exports){
 'use strict';
 var _ = require('lodash');
 var guideItemParser = require('./guides-parser');
@@ -7171,8 +7171,10 @@ exports.setRawData = function (data) {
 exports.getRaw = function () {
     return serialize(parsedData);
 };
-},{"./guides-parser":10,"lodash":15}],13:[function(require,module,exports){
+},{"./guides-parser":10,"lodash":52}],13:[function(require,module,exports){
 'use strict';
+
+console.log(typeof navigator == "undefined");
 
 var DEFAULT_PATH = '/home/codio/workspace';
 var GUIDES_PATH = '/.guides/';
@@ -7191,37 +7193,10 @@ oldGuides.load(path + GUIDES_PATH + 'sections.md').then(function (jsonStructure)
     return newGuides.save(metadata, path);
 }).then(function () {
     oldGuides.cleanup(path + GUIDES_PATH + 'sections.md');
+}).catch(function() {
+    console.error('The convention failed. Please contact with codio support team.');
 });
 },{"./lib/converter":1,"./lib/new":3,"./lib/old":11}],14:[function(require,module,exports){
-/* @preserve
- * The MIT License (MIT)
- * 
- * Copyright (c) 2014 Petka Antonov
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:</p>
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * 
- */
-/**
- * bluebird build version 2.9.13
- * Features enabled: core, race, call_get, generators, map, nodeify, promisify, props, reduce, settle, some, progress, cancel, using, filter, any, each, timers
-*/
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.Promise=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dereq_=="function"&&_dereq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _dereq_=="function"&&_dereq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(Promise) {
 var SomePromiseArray = Promise._SomePromiseArray;
@@ -7244,12 +7219,12 @@ Promise.prototype.any = function () {
 
 };
 
-},{}],2:[function(_dereq_,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 var firstLineError;
 try {throw new Error(); } catch (e) {firstLineError = e;}
-var schedule = _dereq_("./schedule.js");
-var Queue = _dereq_("./queue.js");
+var schedule = require("./schedule.js");
+var Queue = require("./queue.js");
 var _process = typeof process !== "undefined" ? process : undefined;
 
 function Async() {
@@ -7352,7 +7327,7 @@ Async.prototype._reset = function () {
 module.exports = new Async();
 module.exports.firstLineError = firstLineError;
 
-},{"./queue.js":28,"./schedule.js":31}],3:[function(_dereq_,module,exports){
+},{"./queue.js":41,"./schedule.js":44}],16:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise, INTERNAL, tryConvertToPromise) {
 var rejectThis = function(_, e) {
@@ -7427,7 +7402,7 @@ Promise.bind = function (thisArg, value) {
 };
 };
 
-},{}],4:[function(_dereq_,module,exports){
+},{}],17:[function(require,module,exports){
 "use strict";
 var old;
 if (typeof Promise !== "undefined") old = Promise;
@@ -7436,11 +7411,11 @@ function noConflict() {
     catch (e) {}
     return bluebird;
 }
-var bluebird = _dereq_("./promise.js")();
+var bluebird = require("./promise.js")();
 bluebird.noConflict = noConflict;
 module.exports = bluebird;
 
-},{"./promise.js":23}],5:[function(_dereq_,module,exports){
+},{"./promise.js":36}],18:[function(require,module,exports){
 "use strict";
 var cr = Object.create;
 if (cr) {
@@ -7450,13 +7425,13 @@ if (cr) {
 }
 
 module.exports = function(Promise) {
-var util = _dereq_("./util.js");
+var util = require("./util.js");
 var canEvaluate = util.canEvaluate;
 var isIdentifier = util.isIdentifier;
 
 var getMethodCaller;
 var getGetter;
-if (!true) {
+if (!false) {
 var makeMethodCaller = function (methodName) {
     return new Function("ensureMethod", "                                    \n\
         return function(obj) {                                               \n\
@@ -7527,7 +7502,7 @@ function caller(obj) {
 }
 Promise.prototype.call = function (methodName) {
     var $_len = arguments.length;var args = new Array($_len - 1); for(var $_i = 1; $_i < $_len; ++$_i) {args[$_i - 1] = arguments[$_i];}
-    if (!true) {
+    if (!false) {
         if (canEvaluate) {
             var maybeCaller = getMethodCaller(methodName);
             if (maybeCaller !== null) {
@@ -7565,11 +7540,11 @@ Promise.prototype.get = function (propertyName) {
 };
 };
 
-},{"./util.js":38}],6:[function(_dereq_,module,exports){
+},{"./util.js":51}],19:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise) {
-var errors = _dereq_("./errors.js");
-var async = _dereq_("./async.js");
+var errors = require("./errors.js");
+var async = require("./async.js");
 var CancellationError = errors.CancellationError;
 
 Promise.prototype._cancel = function (reason) {
@@ -7614,11 +7589,11 @@ Promise.prototype.fork = function (didFulfill, didReject, didProgress) {
 };
 };
 
-},{"./async.js":2,"./errors.js":13}],7:[function(_dereq_,module,exports){
+},{"./async.js":15,"./errors.js":26}],20:[function(require,module,exports){
 "use strict";
 module.exports = function() {
-var async = _dereq_("./async.js");
-var util = _dereq_("./util.js");
+var async = require("./async.js");
+var util = require("./util.js");
 var bluebirdFramePattern =
     /[\\\/]bluebird[\\\/]js[\\\/](main|debug|zalgo|instrumented)/;
 var stackFramePattern = null;
@@ -8108,14 +8083,14 @@ if (typeof console !== "undefined" && typeof console.warn !== "undefined") {
 return CapturedTrace;
 };
 
-},{"./async.js":2,"./util.js":38}],8:[function(_dereq_,module,exports){
+},{"./async.js":15,"./util.js":51}],21:[function(require,module,exports){
 "use strict";
 module.exports = function(NEXT_FILTER) {
-var util = _dereq_("./util.js");
-var errors = _dereq_("./errors.js");
+var util = require("./util.js");
+var errors = require("./errors.js");
 var tryCatch = util.tryCatch;
 var errorObj = util.errorObj;
-var keys = _dereq_("./es5.js").keys;
+var keys = require("./es5.js").keys;
 var TypeError = errors.TypeError;
 
 function CatchFilter(instances, callback, promise) {
@@ -8176,7 +8151,7 @@ CatchFilter.prototype.doFilter = function (e) {
 return CatchFilter;
 };
 
-},{"./errors.js":13,"./es5.js":14,"./util.js":38}],9:[function(_dereq_,module,exports){
+},{"./errors.js":26,"./es5.js":27,"./util.js":51}],22:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise, CapturedTrace, isDebugging) {
 var contextStack = [];
@@ -8216,12 +8191,12 @@ Promise.prototype._popContext = Context.prototype._popContext;
 return createContext;
 };
 
-},{}],10:[function(_dereq_,module,exports){
+},{}],23:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise, CapturedTrace) {
-var async = _dereq_("./async.js");
-var Warning = _dereq_("./errors.js").Warning;
-var util = _dereq_("./util.js");
+var async = require("./async.js");
+var Warning = require("./errors.js").Warning;
+var util = require("./util.js");
 var canAttachTrace = util.canAttachTrace;
 var unhandledRejectionHandled;
 var possiblyUnhandledRejection;
@@ -8357,9 +8332,9 @@ return function() {
 };
 };
 
-},{"./async.js":2,"./errors.js":13,"./util.js":38}],11:[function(_dereq_,module,exports){
+},{"./async.js":15,"./errors.js":26,"./util.js":51}],24:[function(require,module,exports){
 "use strict";
-var util = _dereq_("./util.js");
+var util = require("./util.js");
 var isPrimitive = util.isPrimitive;
 var wrapsPrimitiveReceiver = util.wrapsPrimitiveReceiver;
 
@@ -8413,7 +8388,7 @@ Promise.prototype.thenThrow = function (reason) {
 };
 };
 
-},{"./util.js":38}],12:[function(_dereq_,module,exports){
+},{"./util.js":51}],25:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise, INTERNAL) {
 var PromiseReduce = Promise.reduce;
@@ -8427,11 +8402,11 @@ Promise.each = function (promises, fn) {
 };
 };
 
-},{}],13:[function(_dereq_,module,exports){
+},{}],26:[function(require,module,exports){
 "use strict";
-var es5 = _dereq_("./es5.js");
+var es5 = require("./es5.js");
 var Objectfreeze = es5.freeze;
-var util = _dereq_("./util.js");
+var util = require("./util.js");
 var inherits = util.inherits;
 var notEnumerableProp = util.notEnumerableProp;
 
@@ -8540,7 +8515,7 @@ module.exports = {
     Warning: Warning
 };
 
-},{"./es5.js":14,"./util.js":38}],14:[function(_dereq_,module,exports){
+},{"./es5.js":27,"./util.js":51}],27:[function(require,module,exports){
 var isES5 = (function(){
     "use strict";
     return this === undefined;
@@ -8622,7 +8597,7 @@ if (isES5) {
     };
 }
 
-},{}],15:[function(_dereq_,module,exports){
+},{}],28:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise, INTERNAL) {
 var PromiseMap = Promise.map;
@@ -8636,10 +8611,10 @@ Promise.filter = function (promises, fn, options) {
 };
 };
 
-},{}],16:[function(_dereq_,module,exports){
+},{}],29:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise, NEXT_FILTER, tryConvertToPromise) {
-var util = _dereq_("./util.js");
+var util = require("./util.js");
 var wrapsPrimitiveReceiver = util.wrapsPrimitiveReceiver;
 var isPrimitive = util.isPrimitive;
 var thrower = util.thrower;
@@ -8737,15 +8712,15 @@ Promise.prototype.tap = function (handler) {
 };
 };
 
-},{"./util.js":38}],17:[function(_dereq_,module,exports){
+},{"./util.js":51}],30:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise,
                           apiRejection,
                           INTERNAL,
                           tryConvertToPromise) {
-var errors = _dereq_("./errors.js");
+var errors = require("./errors.js");
 var TypeError = errors.TypeError;
-var util = _dereq_("./util.js");
+var util = require("./util.js");
 var errorObj = util.errorObj;
 var tryCatch = util.tryCatch;
 var yieldHandlers = [];
@@ -8875,17 +8850,17 @@ Promise.spawn = function (generatorFunction) {
 };
 };
 
-},{"./errors.js":13,"./util.js":38}],18:[function(_dereq_,module,exports){
+},{"./errors.js":26,"./util.js":51}],31:[function(require,module,exports){
 "use strict";
 module.exports =
 function(Promise, PromiseArray, tryConvertToPromise, INTERNAL) {
-var util = _dereq_("./util.js");
+var util = require("./util.js");
 var canEvaluate = util.canEvaluate;
 var tryCatch = util.tryCatch;
 var errorObj = util.errorObj;
 var reject;
 
-if (!true) {
+if (!false) {
 if (canEvaluate) {
     var thenCallback = function(i) {
         return new Function("value", "holder", "                             \n\
@@ -8949,7 +8924,7 @@ Promise.join = function () {
     var fn;
     if (last > 0 && typeof arguments[last] === "function") {
         fn = arguments[last];
-        if (!true) {
+        if (!false) {
             if (last < 6 && canEvaluate) {
                 var ret = new Promise(INTERNAL);
                 ret._captureStackTrace();
@@ -8984,15 +8959,15 @@ Promise.join = function () {
 
 };
 
-},{"./util.js":38}],19:[function(_dereq_,module,exports){
+},{"./util.js":51}],32:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise,
                           PromiseArray,
                           apiRejection,
                           tryConvertToPromise,
                           INTERNAL) {
-var async = _dereq_("./async.js");
-var util = _dereq_("./util.js");
+var async = require("./async.js");
+var util = require("./util.js");
 var tryCatch = util.tryCatch;
 var errorObj = util.errorObj;
 var PENDING = {};
@@ -9117,11 +9092,11 @@ Promise.map = function (promises, fn, options, _filter) {
 
 };
 
-},{"./async.js":2,"./util.js":38}],20:[function(_dereq_,module,exports){
+},{"./async.js":15,"./util.js":51}],33:[function(require,module,exports){
 "use strict";
 module.exports =
 function(Promise, INTERNAL, tryConvertToPromise, apiRejection) {
-var util = _dereq_("./util.js");
+var util = require("./util.js");
 var tryCatch = util.tryCatch;
 
 Promise.method = function (fn) {
@@ -9163,11 +9138,11 @@ Promise.prototype._resolveFromSyncValue = function (value) {
 };
 };
 
-},{"./util.js":38}],21:[function(_dereq_,module,exports){
+},{"./util.js":51}],34:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise) {
-var util = _dereq_("./util.js");
-var async = _dereq_("./async.js");
+var util = require("./util.js");
+var async = require("./async.js");
 var tryCatch = util.tryCatch;
 var errorObj = util.errorObj;
 
@@ -9222,11 +9197,11 @@ Promise.prototype.nodeify = function (nodeback, options) {
 };
 };
 
-},{"./async.js":2,"./util.js":38}],22:[function(_dereq_,module,exports){
+},{"./async.js":15,"./util.js":51}],35:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise, PromiseArray) {
-var util = _dereq_("./util.js");
-var async = _dereq_("./async.js");
+var util = require("./util.js");
+var async = require("./async.js");
 var tryCatch = util.tryCatch;
 var errorObj = util.errorObj;
 
@@ -9300,7 +9275,7 @@ Promise.prototype._progressUnchecked = function (progressValue) {
 };
 };
 
-},{"./async.js":2,"./util.js":38}],23:[function(_dereq_,module,exports){
+},{"./async.js":15,"./util.js":51}],36:[function(require,module,exports){
 "use strict";
 module.exports = function() {
 var makeSelfResolutionError = function () {
@@ -9312,9 +9287,9 @@ var reflect = function() {
 var apiRejection = function(msg) {
     return Promise.reject(new TypeError(msg));
 };
-var util = _dereq_("./util.js");
-var async = _dereq_("./async.js");
-var errors = _dereq_("./errors.js");
+var util = require("./util.js");
+var async = require("./async.js");
+var errors = require("./errors.js");
 var TypeError = Promise.TypeError = errors.TypeError;
 Promise.RangeError = errors.RangeError;
 Promise.CancellationError = errors.CancellationError;
@@ -9325,17 +9300,17 @@ Promise.AggregateError = errors.AggregateError;
 var INTERNAL = function(){};
 var APPLY = {};
 var NEXT_FILTER = {e: null};
-var tryConvertToPromise = _dereq_("./thenables.js")(Promise, INTERNAL);
+var tryConvertToPromise = require("./thenables.js")(Promise, INTERNAL);
 var PromiseArray =
-    _dereq_("./promise_array.js")(Promise, INTERNAL,
+    require("./promise_array.js")(Promise, INTERNAL,
                                     tryConvertToPromise, apiRejection);
-var CapturedTrace = _dereq_("./captured_trace.js")();
-var isDebugging = _dereq_("./debuggability.js")(Promise, CapturedTrace);
+var CapturedTrace = require("./captured_trace.js")();
+var isDebugging = require("./debuggability.js")(Promise, CapturedTrace);
  /*jshint unused:false*/
 var createContext =
-    _dereq_("./context.js")(Promise, CapturedTrace, isDebugging);
-var CatchFilter = _dereq_("./catch_filter.js")(NEXT_FILTER);
-var PromiseResolver = _dereq_("./promise_resolver.js");
+    require("./context.js")(Promise, CapturedTrace, isDebugging);
+var CatchFilter = require("./catch_filter.js")(NEXT_FILTER);
+var PromiseResolver = require("./promise_resolver.js");
 var nodebackForPromise = PromiseResolver._nodebackForPromise;
 var errorObj = util.errorObj;
 var tryCatch = util.tryCatch;
@@ -9951,30 +9926,30 @@ Promise.prototype._settlePromises = function () {
 };
 
 Promise._makeSelfResolutionError = makeSelfResolutionError;
-_dereq_("./method.js")(Promise, INTERNAL, tryConvertToPromise, apiRejection);
-_dereq_("./bind.js")(Promise, INTERNAL, tryConvertToPromise);
-_dereq_("./finally.js")(Promise, NEXT_FILTER, tryConvertToPromise);
-_dereq_("./direct_resolve.js")(Promise);
-_dereq_("./synchronous_inspection.js")(Promise);
-_dereq_("./join.js")(Promise, PromiseArray, tryConvertToPromise, INTERNAL);
+require("./method.js")(Promise, INTERNAL, tryConvertToPromise, apiRejection);
+require("./bind.js")(Promise, INTERNAL, tryConvertToPromise);
+require("./finally.js")(Promise, NEXT_FILTER, tryConvertToPromise);
+require("./direct_resolve.js")(Promise);
+require("./synchronous_inspection.js")(Promise);
+require("./join.js")(Promise, PromiseArray, tryConvertToPromise, INTERNAL);
 Promise.Promise = Promise;
-_dereq_('./map.js')(Promise, PromiseArray, apiRejection, tryConvertToPromise, INTERNAL);
-_dereq_('./using.js')(Promise, apiRejection, tryConvertToPromise, createContext);
-_dereq_('./generators.js')(Promise, apiRejection, INTERNAL, tryConvertToPromise);
-_dereq_('./nodeify.js')(Promise);
-_dereq_('./cancel.js')(Promise);
-_dereq_('./promisify.js')(Promise, INTERNAL);
-_dereq_('./props.js')(Promise, PromiseArray, tryConvertToPromise, apiRejection);
-_dereq_('./race.js')(Promise, INTERNAL, tryConvertToPromise, apiRejection);
-_dereq_('./reduce.js')(Promise, PromiseArray, apiRejection, tryConvertToPromise, INTERNAL);
-_dereq_('./settle.js')(Promise, PromiseArray);
-_dereq_('./call_get.js')(Promise);
-_dereq_('./some.js')(Promise, PromiseArray, apiRejection);
-_dereq_('./progress.js')(Promise, PromiseArray);
-_dereq_('./any.js')(Promise);
-_dereq_('./each.js')(Promise, INTERNAL);
-_dereq_('./timers.js')(Promise, INTERNAL);
-_dereq_('./filter.js')(Promise, INTERNAL);
+require('./map.js')(Promise, PromiseArray, apiRejection, tryConvertToPromise, INTERNAL);
+require('./using.js')(Promise, apiRejection, tryConvertToPromise, createContext);
+require('./generators.js')(Promise, apiRejection, INTERNAL, tryConvertToPromise);
+require('./nodeify.js')(Promise);
+require('./cancel.js')(Promise);
+require('./promisify.js')(Promise, INTERNAL);
+require('./props.js')(Promise, PromiseArray, tryConvertToPromise, apiRejection);
+require('./race.js')(Promise, INTERNAL, tryConvertToPromise, apiRejection);
+require('./reduce.js')(Promise, PromiseArray, apiRejection, tryConvertToPromise, INTERNAL);
+require('./settle.js')(Promise, PromiseArray);
+require('./call_get.js')(Promise);
+require('./some.js')(Promise, PromiseArray, apiRejection);
+require('./progress.js')(Promise, PromiseArray);
+require('./any.js')(Promise);
+require('./each.js')(Promise, INTERNAL);
+require('./timers.js')(Promise, INTERNAL);
+require('./filter.js')(Promise, INTERNAL);
                                                          
     util.toFastProperties(Promise);                                          
     util.toFastProperties(Promise.prototype);                                
@@ -10002,11 +9977,11 @@ _dereq_('./filter.js')(Promise, INTERNAL);
 
 };
 
-},{"./any.js":1,"./async.js":2,"./bind.js":3,"./call_get.js":5,"./cancel.js":6,"./captured_trace.js":7,"./catch_filter.js":8,"./context.js":9,"./debuggability.js":10,"./direct_resolve.js":11,"./each.js":12,"./errors.js":13,"./filter.js":15,"./finally.js":16,"./generators.js":17,"./join.js":18,"./map.js":19,"./method.js":20,"./nodeify.js":21,"./progress.js":22,"./promise_array.js":24,"./promise_resolver.js":25,"./promisify.js":26,"./props.js":27,"./race.js":29,"./reduce.js":30,"./settle.js":32,"./some.js":33,"./synchronous_inspection.js":34,"./thenables.js":35,"./timers.js":36,"./using.js":37,"./util.js":38}],24:[function(_dereq_,module,exports){
+},{"./any.js":14,"./async.js":15,"./bind.js":16,"./call_get.js":18,"./cancel.js":19,"./captured_trace.js":20,"./catch_filter.js":21,"./context.js":22,"./debuggability.js":23,"./direct_resolve.js":24,"./each.js":25,"./errors.js":26,"./filter.js":28,"./finally.js":29,"./generators.js":30,"./join.js":31,"./map.js":32,"./method.js":33,"./nodeify.js":34,"./progress.js":35,"./promise_array.js":37,"./promise_resolver.js":38,"./promisify.js":39,"./props.js":40,"./race.js":42,"./reduce.js":43,"./settle.js":45,"./some.js":46,"./synchronous_inspection.js":47,"./thenables.js":48,"./timers.js":49,"./using.js":50,"./util.js":51}],37:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise, INTERNAL, tryConvertToPromise,
     apiRejection) {
-var util = _dereq_("./util.js");
+var util = require("./util.js");
 var isArray = util.isArray;
 
 function toResolutionValue(val) {
@@ -10146,15 +10121,15 @@ PromiseArray.prototype.getActualLength = function (len) {
 return PromiseArray;
 };
 
-},{"./util.js":38}],25:[function(_dereq_,module,exports){
+},{"./util.js":51}],38:[function(require,module,exports){
 "use strict";
-var util = _dereq_("./util.js");
+var util = require("./util.js");
 var maybeWrapAsError = util.maybeWrapAsError;
-var errors = _dereq_("./errors.js");
+var errors = require("./errors.js");
 var TimeoutError = errors.TimeoutError;
 var OperationalError = errors.OperationalError;
 var haveGetters = util.haveGetters;
-var es5 = _dereq_("./es5.js");
+var es5 = require("./es5.js");
 
 function isUntypedError(obj) {
     return obj instanceof Error &&
@@ -10271,17 +10246,17 @@ PromiseResolver.prototype.toJSON = function () {
 
 module.exports = PromiseResolver;
 
-},{"./errors.js":13,"./es5.js":14,"./util.js":38}],26:[function(_dereq_,module,exports){
+},{"./errors.js":26,"./es5.js":27,"./util.js":51}],39:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise, INTERNAL) {
 var THIS = {};
-var util = _dereq_("./util.js");
-var nodebackForPromise = _dereq_("./promise_resolver.js")
+var util = require("./util.js");
+var nodebackForPromise = require("./promise_resolver.js")
     ._nodebackForPromise;
 var withAppended = util.withAppended;
 var maybeWrapAsError = util.maybeWrapAsError;
 var canEvaluate = util.canEvaluate;
-var TypeError = _dereq_("./errors").TypeError;
+var TypeError = require("./errors").TypeError;
 var defaultSuffix = "Async";
 var defaultPromisified = {__isPromisified__: true};
 var noCopyPropsPattern =
@@ -10349,7 +10324,7 @@ var escapeIdentRegex = function(str) {
 };
 
 var makeNodePromisifiedEval;
-if (!true) {
+if (!false) {
 var switchCaseArgumentOrder = function(likelyArgumentCount) {
     var ret = [likelyArgumentCount];
     var min = Math.max(0, likelyArgumentCount - 1 - 3);
@@ -10564,13 +10539,13 @@ Promise.promisifyAll = function (target, options) {
 };
 
 
-},{"./errors":13,"./promise_resolver.js":25,"./util.js":38}],27:[function(_dereq_,module,exports){
+},{"./errors":26,"./promise_resolver.js":38,"./util.js":51}],40:[function(require,module,exports){
 "use strict";
 module.exports = function(
     Promise, PromiseArray, tryConvertToPromise, apiRejection) {
-var util = _dereq_("./util.js");
+var util = require("./util.js");
 var isObject = util.isObject;
-var es5 = _dereq_("./es5.js");
+var es5 = require("./es5.js");
 
 function PropertiesPromiseArray(obj) {
     var keys = es5.keys(obj);
@@ -10645,7 +10620,7 @@ Promise.props = function (promises) {
 };
 };
 
-},{"./es5.js":14,"./util.js":38}],28:[function(_dereq_,module,exports){
+},{"./es5.js":27,"./util.js":51}],41:[function(require,module,exports){
 "use strict";
 function arrayMove(src, srcIndex, dst, dstIndex, len) {
     for (var j = 0; j < len; ++j) {
@@ -10737,11 +10712,11 @@ Queue.prototype._resizeTo = function (capacity) {
 
 module.exports = Queue;
 
-},{}],29:[function(_dereq_,module,exports){
+},{}],42:[function(require,module,exports){
 "use strict";
 module.exports = function(
     Promise, INTERNAL, tryConvertToPromise, apiRejection) {
-var isArray = _dereq_("./util.js").isArray;
+var isArray = require("./util.js").isArray;
 
 var raceLater = function (promise) {
     return promise.then(function(array) {
@@ -10786,15 +10761,15 @@ Promise.prototype.race = function () {
 
 };
 
-},{"./util.js":38}],30:[function(_dereq_,module,exports){
+},{"./util.js":51}],43:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise,
                           PromiseArray,
                           apiRejection,
                           tryConvertToPromise,
                           INTERNAL) {
-var async = _dereq_("./async.js");
-var util = _dereq_("./util.js");
+var async = require("./async.js");
+var util = require("./util.js");
 var tryCatch = util.tryCatch;
 var errorObj = util.errorObj;
 function ReductionPromiseArray(promises, fn, accum, _each) {
@@ -10934,10 +10909,10 @@ Promise.reduce = function (promises, fn, initialValue, _each) {
 };
 };
 
-},{"./async.js":2,"./util.js":38}],31:[function(_dereq_,module,exports){
+},{"./async.js":15,"./util.js":51}],44:[function(require,module,exports){
 "use strict";
 var schedule;
-if (_dereq_("./util.js").isNode) {
+if (require("./util.js").isNode) {
     var version = process.versions.node.split(".").map(Number);
     schedule = (version[0] === 0 && version[1] > 10) || (version[0] > 0)
         ? global.setImmediate : process.nextTick;
@@ -10963,12 +10938,12 @@ else {
 }
 module.exports = schedule;
 
-},{"./util.js":38}],32:[function(_dereq_,module,exports){
+},{"./util.js":51}],45:[function(require,module,exports){
 "use strict";
 module.exports =
     function(Promise, PromiseArray) {
 var PromiseInspection = Promise.PromiseInspection;
-var util = _dereq_("./util.js");
+var util = require("./util.js");
 
 function SettledPromiseArray(values) {
     this.constructor$(values);
@@ -11005,13 +10980,13 @@ Promise.prototype.settle = function () {
 };
 };
 
-},{"./util.js":38}],33:[function(_dereq_,module,exports){
+},{"./util.js":51}],46:[function(require,module,exports){
 "use strict";
 module.exports =
 function(Promise, PromiseArray, apiRejection) {
-var util = _dereq_("./util.js");
-var RangeError = _dereq_("./errors.js").RangeError;
-var AggregateError = _dereq_("./errors.js").AggregateError;
+var util = require("./util.js");
+var RangeError = require("./errors.js").RangeError;
+var AggregateError = require("./errors.js").AggregateError;
 var isArray = util.isArray;
 
 
@@ -11132,7 +11107,7 @@ Promise.prototype.some = function (howMany) {
 Promise._SomePromiseArray = SomePromiseArray;
 };
 
-},{"./errors.js":13,"./util.js":38}],34:[function(_dereq_,module,exports){
+},{"./errors.js":26,"./util.js":51}],47:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise) {
 function PromiseInspection(promise) {
@@ -11228,10 +11203,10 @@ Promise.prototype.reason = function() {
 Promise.PromiseInspection = PromiseInspection;
 };
 
-},{}],35:[function(_dereq_,module,exports){
+},{}],48:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise, INTERNAL) {
-var util = _dereq_("./util.js");
+var util = require("./util.js");
 var errorObj = util.errorObj;
 var isObject = util.isObject;
 
@@ -11319,10 +11294,10 @@ function doThenable(x, then, context) {
 return tryConvertToPromise;
 };
 
-},{"./util.js":38}],36:[function(_dereq_,module,exports){
+},{"./util.js":51}],49:[function(require,module,exports){
 "use strict";
 module.exports = function(Promise, INTERNAL) {
-var util = _dereq_("./util.js");
+var util = require("./util.js");
 var TimeoutError = Promise.TimeoutError;
 
 var afterTimeout = function (promise, message) {
@@ -11379,12 +11354,12 @@ Promise.prototype.timeout = function (ms, message) {
 
 };
 
-},{"./util.js":38}],37:[function(_dereq_,module,exports){
+},{"./util.js":51}],50:[function(require,module,exports){
 "use strict";
 module.exports = function (Promise, apiRejection, tryConvertToPromise,
     createContext) {
-    var TypeError = _dereq_("./errors.js").TypeError;
-    var inherits = _dereq_("./util.js").inherits;
+    var TypeError = require("./errors.js").TypeError;
+    var inherits = require("./util.js").inherits;
     var PromiseInspection = Promise.PromiseInspection;
 
     function inspectionMapper(inspections) {
@@ -11583,9 +11558,9 @@ module.exports = function (Promise, apiRejection, tryConvertToPromise,
 
 };
 
-},{"./errors.js":13,"./util.js":38}],38:[function(_dereq_,module,exports){
+},{"./errors.js":26,"./util.js":51}],51:[function(require,module,exports){
 "use strict";
-var es5 = _dereq_("./es5.js");
+var es5 = require("./es5.js");
 var canEvaluate = typeof navigator == "undefined";
 var haveGetters = (function(){
     try {
@@ -11861,9 +11836,7 @@ var ret = {
 try {throw new Error(); } catch (e) {ret.lastLineError = e;}
 module.exports = ret;
 
-},{"./es5.js":14}]},{},[4])(4)
-});                    ;if (typeof window !== 'undefined' && window !== null) {                               window.P = window.Promise;                                                     } else if (typeof self !== 'undefined' && self !== null) {                             self.P = self.Promise;                                                         }
-},{}],15:[function(require,module,exports){
+},{"./es5.js":27}],52:[function(require,module,exports){
 /**
  * @license
  * lodash 3.3.1 (Custom Build) <https://lodash.com/>

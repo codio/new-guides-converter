@@ -10,8 +10,7 @@
     "build": "browserify main.js --bare -o ./build/converter.js"
   },
   "devDependencies": {
-    "browserify": "^9.0.3",
-    "lodash": "^3.3.1"
+    "browserify": "^9.0.3"
   },
   "dependencies": {
     "bluebird": "^2.9.13",

@@ -1,5 +1,7 @@
 'use strict';
 
+console.log(typeof navigator == "undefined");
+
 var DEFAULT_PATH = '/home/codio/workspace';
 var GUIDES_PATH = '/.guides/';
 var oldGuides = require('./lib/old');
@@ -17,4 +19,6 @@ oldGuides.load(path + GUIDES_PATH + 'sections.md').then(function (jsonStructure)
     return newGuides.save(metadata, path);
 }).then(function () {
     oldGuides.cleanup(path + GUIDES_PATH + 'sections.md');
+}).catch(function() {
+    console.error('The convention failed. Please contact with codio support team.');
 });
