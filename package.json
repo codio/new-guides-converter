@@ -7,7 +7,7 @@
     "url": "https://Maximka@bitbucket.org/codio/new-guides-converter.git"
   },
   "scripts": {
-    "build": "browserify main.js -o ./build/converter.js"
+    "build": "browserify main.js --bare -o ./build/converter.js"
   },
   "devDependencies": {
     "browserify": "^9.0.3",
