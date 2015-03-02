@@ -1,7 +1,5 @@
 'use strict';
 
-console.log(typeof navigator == "undefined");
-
 var DEFAULT_PATH = '/home/codio/workspace';
 var GUIDES_PATH = '/.guides/';
 var oldGuides = require('./lib/old');

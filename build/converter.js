@@ -7174,8 +7174,6 @@ exports.getRaw = function () {
 },{"./guides-parser":10,"lodash":52}],13:[function(require,module,exports){
 'use strict';
 
-console.log(typeof navigator == "undefined");
-
 var DEFAULT_PATH = '/home/codio/workspace';
 var GUIDES_PATH = '/.guides/';
 var oldGuides = require('./lib/old');
