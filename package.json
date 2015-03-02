@@ -1,0 +1,20 @@
+{
+  "name": "new-guides-converter",
+  "version": "1.0.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://Maximka@bitbucket.org/codio/new-guides-converter.git"
+  },
+  "scripts": {
+    "build": "browserify main.js -o ./build/converter.js"
+  },
+  "devDependencies": {
+    "browserify": "^9.0.3",
+    "lodash": "^3.3.1"
+  },
+  "dependencies": {
+    "bluebird": "^2.9.13",
+    "lodash": "^3.3.1"
+  }
+}
