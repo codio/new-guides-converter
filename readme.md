@@ -13,7 +13,7 @@ Every section has it content in a separate file located in ```.guides/content/``
 to start conversion run in the terminal:
 
 ```
-    curl https://bitbucket.org/codio/new-guides-converter/raw/master/build/converter.js | node
+    curl https://raw.githubusercontent.com/codio/new-guides-converter/master/build/converter.js | node
 ```
 
 this will download the latest version of convert guides in your workspace directory
